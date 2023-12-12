@@ -1,13 +1,11 @@
 import React from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Layout from "../components/Layout"
 import Image from "next/image";
 
 // `app/dashboard/page.tsx` is the UI for the `/dashboard` URL
 export default function About() {
     return (
-      <body className='min-h-screen'>
-        <Header/>
+      <Layout>
         <main className="flex justify-center">
             <div className="flex flex-col items-center justify-between p-16 max-w-5xl">
                 <h2 className="text-3xl font-bold m-4">About</h2>
@@ -41,7 +39,6 @@ export default function About() {
                 </div>
             </div>
         </main>
-        <Footer/>
-      </body>
+        </Layout>
     )
   }
