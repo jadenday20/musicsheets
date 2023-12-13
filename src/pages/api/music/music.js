@@ -3,10 +3,10 @@ import { getMusic } from "@/lib/mongo/music";
 const handler = async (req, res) => {
   if (req.method === "GET") {
     try {
-      const musicId = req.query.id; // Assuming the ID is passed as a query parameter
+      const songId = req.query.id; // Assuming the ID is passed as a query parameter
 
       const { music, error } = await getMusic();
-      const song = music.find((music) => music.id === musicId); // Modify this line to find the music by ID
+      const song = music.find((song) => song.id === songId); // Modify this line to find the music by ID
       if (!song) {
         return res.status(404).json({ error: "Music not found" });
       }
