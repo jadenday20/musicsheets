@@ -9,8 +9,8 @@ export default function Home() {
           <div className="relative rounded">
             <div className="md:absolute md:text-white left-10 top-10 md:bg-black/40 p-4 rounded max-w-sm">
               <h3>Welcome to Music Sheets!</h3>
-              <p>Explore our libraries of sheet music:</p>
-              <Button href="./shop" linkTitle={"Explore Sheet Music"}></Button>
+              <p>Explore our libraries of free sheet music:</p>
+              <Button href="./music" linkTitle={"Explore Sheet Music"}></Button>
             </div>
             <div className="md:absolute md:text-white right-10 bottom-10 md:text-right md:bg-black/60 p-4 rounded max-w-sm">
               <h3>Learn About Us</h3>

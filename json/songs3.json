@@ -54,18 +54,9 @@
         "instruments": ["violin"]
     },
     {
-        "name": "Fall is Coming: Part 1",
-        "file": "Fall_is_Coming_1",
-        "audioFiles": ["FIC1-violin1-count","FIC1-violin2-count","FIC1-both-count"],
-        "price": 1,
-        "composer": "Jaden Day",
-        "category": "Classical",
-        "instruments": ["violin"]
-    },
-    {
-        "name": "Fall is Coming: Part 2",
-        "file": "Fall_is_Coming_2",
-        "audioFiles": ["FIC2-violin1-count","FIC2-violin2-count","FIC2-both-count","FIC-full-song-violin1-count","FIC-full-song-violin2-count","FIC-full-song-both-count"],
+        "name": "Fall is Coming",
+        "file": "Fall_is_Coming",
+        "audioFiles": ["Fall_is_Coming"],
         "price": 1,
         "composer": "Jaden Day",
         "category": "Classical",
@@ -78,7 +69,7 @@
         "price": 1,
         "composer": "Mildred T. Pettit",
         "category": "Religious",
-        "instruments": ["violin"]
+        "instruments": ["violin", "piano"]
     },
     {
         "name": "I am a Child of God: Violin 1",
@@ -87,7 +78,7 @@
         "price": 1,
         "composer": "Mildred T. Pettit",
         "category": "Religious",
-        "instruments": ["violin"]
+        "instruments": ["violin", "piano"]
     },
     {
         "name": "I am a Child of God: Violin 2",
@@ -96,14 +87,14 @@
         "price": 1,
         "composer": "Mildred T. Pettit",
         "category": "Religious",
-        "instruments": ["violin"]
+        "instruments": ["violin", "piano"]
     },
     {
         "name": "Dreaming of a White Christmas",
         "file": "Dreaming_of_a_white_christmas",
         "audioFiles": [],
         "price": 2,
-        "composer": "Mildred T. Pettit",
+        "composer": "Ron Keeris",
         "category": "Christmas",
         "instruments": ["piano"]
     }

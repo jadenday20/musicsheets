@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import SingleProduct from "./Product";
 import axios from 'axios';
 import formatPrice from "./FormatPrice";
+import { capitalizeFirstLetter } from "./CapitalizeFirstLetter";
 
 interface Song {
   _id: number;
@@ -20,6 +21,7 @@ export default function Products() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [selectedInstruments, setSelectedInstruments] = useState<string[]>([]);
   const [selectedSort, setSelectedSort] = useState<string>('name_asc');
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
   useEffect(() => {
     async function fetchSongs() {
@@ -53,6 +55,10 @@ export default function Products() {
     setSelectedSort(e.target.value);
   };
 
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
+
   // Filter logic
   let filteredSongs = [...songs];
 
@@ -66,18 +72,33 @@ export default function Products() {
     );
   }
 
+  if (searchTerm.trim() !== '') {
+    const searchTermLowerCase = searchTerm.toLowerCase();
+    filteredSongs = filteredSongs.filter(song =>
+      song.name.toLowerCase().includes(searchTermLowerCase) ||
+      song.composer.toLowerCase().includes(searchTermLowerCase) || // Check composer
+      song.instruments.some(
+        instrument => instrument.toLowerCase().includes(searchTermLowerCase)
+      ) ||// Check instruments array 
+      song.category.toLowerCase().includes(searchTermLowerCase) // Check category
+      // Add more fields if needed (e.g., instruments, href, etc.)
+    );
+  }
+
+  const [sortDirection, setSortDirection] = useState<boolean>(true);
+
+  const handleSortToggle = () => {
+    setSortDirection(prevDirection => !prevDirection);
+  };
+
   // Sort logic
   let sortedSongs = [...filteredSongs];
 
-  // Sorting options (name or price)
-  if (selectedSort === 'name_asc') {
-    sortedSongs.sort((a, b) => a.name.localeCompare(b.name));
-  } else if (selectedSort === 'name_desc') {
-    sortedSongs.sort((a, b) => b.name.localeCompare(a.name));
-  } else if (selectedSort === 'price_asc') {
-    sortedSongs.sort((a, b) => a.price - b.price);
-  } else if (selectedSort === 'price_desc') {
-    sortedSongs.sort((a, b) => b.price - a.price);
+  if (selectedSort === 'name_asc' || selectedSort === 'name_desc') {
+    sortedSongs.sort((a, b) => {
+      const compareResult = a.name.localeCompare(b.name);
+      return sortDirection ? compareResult : -compareResult; // Toggle between A-Z and Z-A
+    });
   }
 
   // Get unique categories
@@ -88,51 +109,60 @@ export default function Products() {
 
   return (
     <div className="flex flex-col">
-      <div className="filter-options text-center m-3">
-        <label htmlFor="categoryFilter">Filter by Category: </label>
-        <select
-          className="hover:cursor-pointer"
-          id="categoryFilter"
-          value={selectedCategory}
-          onChange={handleCategoryChange}
-        >
-          {categories.map((category, index) => (
-            <option key={index} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="filter-options text-center m-3">
-        <label>Filter by Instruments: </label>
-        {instruments.map((instrument, index) => (
-          <div key={index} className="inline-block mx-2">
-            <input
-              type="checkbox"
-              id={instrument}
-              value={instrument}
-              onChange={handleInstrumentChange}
-              checked={selectedInstruments.includes(instrument)}
-            />
-            <label htmlFor={instrument}>{instrument}</label>
+              <div className="search-bar text-center m-3">
+          <label htmlFor="searchInput">Search: </label>
+          <input
+            type="text"
+            className="border rounded px-2 py-1"
+            id="searchInput"
+            value={searchTerm}
+            onChange={handleSearch}
+          />
           </div>
-        ))}
-      </div>
+      <div className="flex flex-col md:flex-row justify-center gap-5">
+        <div className="filter-options text-center m-3">
+          <label htmlFor="categoryFilter">Filter by Category: </label>
+          <select
+            className="hover:cursor-pointer"
+            id="categoryFilter"
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+          >
+            {categories.map((category, index) => (
+              <option key={index} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      <div className="sort-options text-center m-3">
-        <label htmlFor="sortFilter">Sort by: </label>
-        <select
-          className="hover:cursor-pointer"
-          id="sortFilter"
-          value={selectedSort}
-          onChange={handleSortChange}
-        >
-          <option value="name_asc">Name (A-Z)</option>
-          <option value="name_desc">Name (Z-A)</option>
-          <option value="price_asc">Price (Low to High)</option>
-          <option value="price_desc">Price (High to Low)</option>
-        </select>
+        <div className="filter-options text-center m-3">
+          <label>Filter by Instruments: </label>
+          {instruments.map((instrument, index) => (
+            <div key={index} className="inline-block mx-2">
+              <input
+                className="cursor-pointer"
+                type="checkbox"
+                id={instrument}
+                value={instrument}
+                onChange={handleInstrumentChange}
+                checked={selectedInstruments.includes(instrument)}
+              />
+              <label htmlFor={instrument} className="cursor-pointer">{capitalizeFirstLetter(instrument)}</label>
+            </div>
+          ))}
+        </div>
+
+        <div className="sort-options text-center m-3">
+          <label htmlFor="sortToggle" className="group hover:cursor-pointer">Sort by Name: </label>
+          <button
+            className="hover:cursor-pointer rounded bg-slate-800 text-white px-3 hover:bg-slate-600 group-hover:bg-slate-600"
+            id="sortToggle"
+            onClick={handleSortToggle}
+          >
+            {sortDirection ? 'A-Z' : 'Z-A'}
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-5 mx-auto text-center">
@@ -142,7 +172,7 @@ export default function Products() {
             category={song.category}
             key={song._id}
             href={`songs/${song._id}`}
-            price={formatPrice(song.price)}
+            // price={formatPrice(song.price)}
             _id={song._id}
             composer={song.composer}
             file={song.file}

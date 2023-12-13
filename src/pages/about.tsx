@@ -36,7 +36,7 @@ export default function About() {
                         />
                     <div className="mt-6">
                         <h3>The Store: Music Sheets</h3>
-                        <p className="mb-2">Music Sheets is an online sheet music store where you can find loads of inexpensive sheet music.</p>
+                        <p className="mb-2">Music Sheets is an online sheet music store where you can find loads of free sheet music.</p>
                         <Button href="./shop" linkTitle={"Shop for Music"}></Button>
                     </div>
                 </div>
