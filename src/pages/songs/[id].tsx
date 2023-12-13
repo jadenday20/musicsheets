@@ -4,15 +4,17 @@ import Layout from '@/components/Layout';
 import Button from '@/components/Button';
 import axios from 'axios';
 import Image from 'next/image';
+import formatPrice from '@/components/FormatPrice';
 
 interface Song {
     _id: number;
     name: string;
     composer: string;
-    arranger: string;
-    year: string;
     price: number;
-    imagePath: string;
+    file: string;
+    audioFiles: string[];
+    category: string;
+    instruments: string[];
 }
 
 export default function Page() {
@@ -24,7 +26,7 @@ export default function Page() {
         const fetchSong = async () => {
             try {
                 const response = await axios.get(`/api/music/${id}`);
-                setSong(response.data.song);
+                setSong(response.data.music);
             } catch (error) {
                 console.error('Error fetching song:', error);
             }
@@ -46,7 +48,7 @@ export default function Page() {
 
     const addToCart = () => {
         // Retrieve existing cart items from localStorage or initialize an empty array
-        const existingCartItems = localStorage.getItem('cartItems');
+        const existingCartItems = localStorage.getItem('sheetMusicCartItems');
         const cartItems: Song[] = existingCartItems ? JSON.parse(existingCartItems) : [];
 
         // Check if the song is already in the cart
@@ -57,7 +59,7 @@ export default function Page() {
             cartItems.push(song);
 
             // Update the cart items in localStorage
-            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            localStorage.setItem('sheetMusicCartItems', JSON.stringify(cartItems));
             alert(`${song.name} added to cart!`);
         } else {
             alert(`${song.name} is already in the cart!`);
@@ -66,22 +68,29 @@ export default function Page() {
 
     return (
         <Layout>
-            <main className="flex flex-col items-center p-16">
-                <h2>{song.name}</h2>
-                <Image src={"/productImages/" + song.imagePath} alt={song.name} width={300} height={300}>
-
-                </Image>
-                <div>
-                    <p className='text-xl font-bold'>{song.price}</p>
-                    <p>Composer: {song.composer}</p>
-                    <p>Arranger: {song.arranger}</p>
-                    <p>Year: {song.year}</p>
-                    <Button linkTitle="Add to Cart" onClickEvent={addToCart} href="/cart" />
+                <div className='flex flex-col lg:flex-row gap-5'>
+                    <div className='w-96'>
+                        <h2>{song.name}</h2>
+                        <p className='text-xl font-bold'>{formatPrice(song.price)}</p>
+                        <p>composer: {song.composer}</p>
+                        <p>audioFiles: {song.audioFiles}</p>
+                        <p>category: {song.category}</p>
+                        <p>instruments: {song.instruments}</p>
+                        <Button linkTitle="Add to Cart" onClickEvent={addToCart} href="/cart" />
+                        
+                    </div>
+                    <iframe
+                        src={`/sheet_music/${song.file}.pdf`}
+                        title={song.name}
+                        width="100%"
+                        height="500px"
+                        style={{ border: '1px solid #ccc' }}
+                    ></iframe>
                 </div>
 
                 <span className='w-96 h-px bg-slate-800 my-2 block mx-auto'></span>
                 <Button linkTitle="Shop for More" href="/shop" />
-            </main>
+
         </Layout>
     );
 }

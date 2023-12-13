@@ -63,3 +63,23 @@ export async function getMusicById(id) {
     return { error: "Failed to fetch music!" };
   }
 }
+
+export async function getMusicByName(name) {
+  try {
+    if (!music) await init();
+
+    // Find the music by its name
+    const result = await music.findOne({ name: name });
+
+    if (!result) {
+      return { error: "Music not found!" };
+    }
+
+    // Convert ObjectId to string in the music object
+    const musicWithIdAsString = { ...result, _id: result._id.toString() };
+
+    return { music: musicWithIdAsString };
+  } catch (error) {
+    return { error: "Failed to fetch music!" };
+  }
+}
