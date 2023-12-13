@@ -4,7 +4,7 @@ import HamburgerIcon from '../../public/HamburgerIcon-white.svg';
 import XIcon from '../../public/XIcon-white.svg';
 import Image from 'next/image';
 
-const NavItems = ['Shop', 'Cart', 'About', 'Contact'];
+const NavItems = ['Home', 'Shop', 'Cart', 'About', 'Contact'];
 
 export default function Nav() {
   const [showMenu, setShowMenu] = useState(false);

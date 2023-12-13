@@ -1,0 +1,67 @@
+[
+    {
+        "name": "Gavotte",
+        "file": "Gavotte",
+        "audioFiles": ["Gavotte_Violin_Only", "Gavotte_With_Harpsicord"]
+    },
+    {
+        "name": "A Whole New World",
+        "file": "A_Whole_New_World",
+        "audioFiles": ["A_Whole_New_World"]
+    },
+    {
+        "name": "The Round Song",
+        "file": "The_Round_Song",
+        "audioFiles": ["The_Round_Song"]
+    },
+    {
+        "name": "He's a Pirate",
+        "file": "Hes_a_Pirate",
+        "audioFiles": ""
+    },
+    {
+        "name": "Go the Distance",
+        "file": "Go_the_Distance",
+        "audioFiles": ["Go_the_Distance"]
+    },
+    {
+        "name": "Fiddle Song",
+        "file": "Fiddle_Song",
+        "audioFiles": ""
+    },
+    {
+        "name": "Fiddle Song Fingerings",
+        "file": "Fiddle_Song_Fingering",
+        "audioFiles": ""
+    },
+    {
+        "name": "Fall is Coming: Part 1",
+        "file": "Fall_is_Coming_1",
+        "audioFiles": ["FIC1-violin1-count","FIC1-violin2-count","FIC1-both-count"]
+    },
+    {
+        "name": "Fall is Coming: Part 2",
+        "file": "Fall_is_Coming_2",
+        "audioFiles": ["FIC2-violin1-count","FIC2-violin2-count","FIC2-both-count","FIC-full-song-violin1-count","FIC-full-song-violin2-count","FIC-full-song-both-count"]
+    },
+    {
+        "name": "I am a Child of God: Both",
+        "file": "I_am_a_Child_of_God_Both",
+        "audioFiles": ["I_am_a_Child_of_God", "Child_of_God_Violin_counting", "Child_of_God_Piano_counting"]
+    },
+    {
+        "name": "I am a Child of God: Violin 1",
+        "file": "I_am_a_Child_of_God_Violin1",
+        "audioFiles": ""
+    },
+    {
+        "name": "I am a Child of God: Violin 2",
+        "file": "I_am_a_Child_of_God_Violin2",
+        "audioFiles": ""
+    },
+    {
+        "name": "Practice Record",
+        "file": "practice-record",
+        "audioFiles": ""
+    }
+]

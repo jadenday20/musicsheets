@@ -7,7 +7,7 @@ interface LogoProps {
 
 export default function Logo({ logoTitle }: LogoProps) {
     return (
-        <Link href="/" className="flex hover:opacity-90">
+        <Link href="/" className="flex hover:opacity-80">
             <Image
                 src="/logo-white.svg"
                 alt="Music Sheets Logo"

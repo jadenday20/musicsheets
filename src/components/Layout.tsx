@@ -10,7 +10,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     return (
       <div className='min-h-screen'>
         <Header/>
-        {children}
+            <main className="flex flex-col items-center p-16">
+                {children}
+            </main>
         <Footer/>
       </div>
     )

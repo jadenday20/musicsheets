@@ -2,6 +2,8 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -26,12 +28,29 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+h2 {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: bold;
+  margin: 1rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 500;
+}
+
+p {
+  font-family: noto;
+}
+
 main {
   min-height: calc(100vh - 89px);
 }
 
 @media screen and (min-width: 768px) {
 main {
-  min-height: calc(100vh - 141.6px - 89px)
+  min-height: calc(100vh - 141.6px - 92px)
 }
 }

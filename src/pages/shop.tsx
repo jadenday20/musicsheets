@@ -5,9 +5,7 @@ import Layout from "@/components/Layout";
 export default function Shop() {
     return (
       <Layout>
-        <main className="flex flex-col items-center justify-between p-16">
-          <h2 className="text-3xl font-bold m-4">Shop</h2>
-        </main>
+          <h2>Shop</h2>
       </Layout>
     )
   }
