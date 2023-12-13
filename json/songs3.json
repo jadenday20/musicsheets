@@ -48,7 +48,7 @@
         "name": "Fiddle Song",
         "file": "Fiddle_Song",
         "audioFiles": "",
-        "price": 5,
+        "price": 3,
         "composer": "Composer Unknown",
         "category": "Fiddle",
         "instruments": ["violin"]
@@ -57,7 +57,7 @@
         "name": "Fall is Coming: Part 1",
         "file": "Fall_is_Coming_1",
         "audioFiles": ["FIC1-violin1-count","FIC1-violin2-count","FIC1-both-count"],
-        "price": 5,
+        "price": 1,
         "composer": "Jaden Day",
         "category": "Classical",
         "instruments": ["violin"]
@@ -66,7 +66,7 @@
         "name": "Fall is Coming: Part 2",
         "file": "Fall_is_Coming_2",
         "audioFiles": ["FIC2-violin1-count","FIC2-violin2-count","FIC2-both-count","FIC-full-song-violin1-count","FIC-full-song-violin2-count","FIC-full-song-both-count"],
-        "price": 5,
+        "price": 1,
         "composer": "Jaden Day",
         "category": "Classical",
         "instruments": ["violin"]
@@ -75,7 +75,7 @@
         "name": "I am a Child of God: Both",
         "file": "I_am_a_Child_of_God_Both",
         "audioFiles": ["I_am_a_Child_of_God", "Child_of_God_Violin_counting", "Child_of_God_Piano_counting"],
-        "price": 5,
+        "price": 1,
         "composer": "Mildred T. Pettit",
         "category": "Religious",
         "instruments": ["violin"]
@@ -84,7 +84,7 @@
         "name": "I am a Child of God: Violin 1",
         "file": "I_am_a_Child_of_God_Violin1",
         "audioFiles": "",
-        "price": 5,
+        "price": 1,
         "composer": "Mildred T. Pettit",
         "category": "Religious",
         "instruments": ["violin"]
@@ -93,7 +93,7 @@
         "name": "I am a Child of God: Violin 2",
         "file": "I_am_a_Child_of_God_Violin2",
         "audioFiles": "",
-        "price": 5,
+        "price": 1,
         "composer": "Mildred T. Pettit",
         "category": "Religious",
         "instruments": ["violin"]

@@ -4,20 +4,22 @@ import axios from 'axios';
 import formatPrice from "./FormatPrice";
 
 interface Song {
-    _id: number;
-    name: string;
-    composer: string;
-    price: number;
-    file: string;
-    audioFiles: string[];
-    category: string;
-    instruments: string[];
-    href: string;
-    // music: any;
+  _id: number;
+  name: string;
+  composer: string;
+  price: number;
+  file: string;
+  audioFiles: string[];
+  category: string;
+  instruments: string[];
+  href: string;
+  // music: any;
 }
+
 export default function Products() {
   const [songs, setSongs] = useState<Song[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [selectedSort, setSelectedSort] = useState<string>('name_asc'); // Set default sort order to A-Z
 
   useEffect(() => {
     async function fetchSongs() {
@@ -36,15 +38,41 @@ export default function Products() {
     setSelectedCategory(e.target.value);
   };
 
+  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedSort(e.target.value);
+  };
+
   // Filter logic
   const filteredSongs = selectedCategory === 'All'
     ? songs
     : songs.filter((song) => song.category === selectedCategory);
 
+  // Sort logic
+  let sortedSongs = [...filteredSongs]; // Create a copy of filteredSongs to avoid mutating state directly
+
+  if (selectedSort === 'name_asc') {
+    sortedSongs.sort((a, b) => a.name.localeCompare(b.name)); // Sort by name ascending
+  } else if (selectedSort === 'name_desc') {
+    sortedSongs.sort((a, b) => b.name.localeCompare(a.name)); // Sort by name descending
+  } else if (selectedSort === 'price_asc') {
+    sortedSongs.sort((a, b) => {
+      if (a.price === b.price) {
+        return a.name.localeCompare(b.name); // If prices are equal, sort by name
+      }
+      return a.price - b.price; // Sort by price ascending
+    });
+  } else if (selectedSort === 'price_desc') {
+    sortedSongs.sort((a, b) => {
+      if (a.price === b.price) {
+        return a.name.localeCompare(b.name); // If prices are equal, sort by name
+      }
+      return b.price - a.price; // Sort by price descending
+    });
+  }
+  // Add more sorting options as needed...
+
   // Get unique categories
   const categories = Array.from(new Set(songs.map((song) => song.category)));
-
-  // Add 'All' option to categories
   categories.unshift('All');
 
   return (
@@ -65,8 +93,24 @@ export default function Products() {
         </select>
       </div>
 
+      <div className="sort-options text-center m-3">
+        <label htmlFor="sortFilter">Sort by: </label>
+        <select
+          className="hover:cursor-pointer"
+          id="sortFilter"
+          value={selectedSort}
+          onChange={handleSortChange}
+        >
+          <option value="name_asc">Name (A-Z)</option>
+          <option value="name_desc">Name (Z-A)</option>
+          <option value="price_asc">Price (Low-High)</option>
+          <option value="price_desc">Price (High-Low)</option>
+          {/* Add more sorting options here */}
+        </select>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-5 mx-auto text-center">
-        {filteredSongs.map((song) => (
+        {sortedSongs.map((song) => (
           <SingleProduct
             name={song.name}
             category={song.category}
