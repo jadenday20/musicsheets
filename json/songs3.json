@@ -29,7 +29,7 @@
     {
         "name": "He's a Pirate",
         "file": "Hes_a_Pirate",
-        "audioFiles": "",
+        "audioFiles": [],
         "price": 5,
         "composer": "Klaus Badelt",
         "category": "Movie",
@@ -47,7 +47,7 @@
     {
         "name": "Fiddle Song",
         "file": "Fiddle_Song",
-        "audioFiles": "",
+        "audioFiles": [],
         "price": 3,
         "composer": "Composer Unknown",
         "category": "Fiddle",
@@ -83,7 +83,7 @@
     {
         "name": "I am a Child of God: Violin 1",
         "file": "I_am_a_Child_of_God_Violin1",
-        "audioFiles": "",
+        "audioFiles": [],
         "price": 1,
         "composer": "Mildred T. Pettit",
         "category": "Religious",
@@ -92,10 +92,19 @@
     {
         "name": "I am a Child of God: Violin 2",
         "file": "I_am_a_Child_of_God_Violin2",
-        "audioFiles": "",
+        "audioFiles": [],
         "price": 1,
         "composer": "Mildred T. Pettit",
         "category": "Religious",
         "instruments": ["violin"]
+    },
+    {
+        "name": "Dreaming of a White Christmas",
+        "file": "Dreaming_of_a_white_christmas",
+        "audioFiles": [],
+        "price": 2,
+        "composer": "Mildred T. Pettit",
+        "category": "Christmas",
+        "instruments": ["piano"]
     }
 ]

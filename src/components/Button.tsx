@@ -16,7 +16,7 @@ const Button: React.FC<ButtonProps> = ({ href, linkTitle, onClickEvent, center, 
         }
     };
 
-    const buttonClasses = `bg-slate-800 text-white p-4 pl-6 pr-6 rounded-lg hover:bg-slate-600 duration-500 max-w-fit my-2 block group-hover:bg-blue-900 ${center ? 'm-auto' : ''} ${className || ''}`;
+    const buttonClasses = `bg-slate-800 text-white p-4 pl-6 pr-6 rounded-lg hover:bg-slate-600 hover:cursor-pointer duration-500 max-w-fit my-2 block group-hover:bg-blue-900 ${center ? 'm-auto' : ''} ${className || ''}`;
 
     return (
         <a

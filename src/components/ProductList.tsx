@@ -13,13 +13,13 @@ interface Song {
   category: string;
   instruments: string[];
   href: string;
-  // music: any;
 }
 
 export default function Products() {
   const [songs, setSongs] = useState<Song[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [selectedSort, setSelectedSort] = useState<string>('name_asc'); // Set default sort order to A-Z
+  const [selectedInstruments, setSelectedInstruments] = useState<string[]>([]);
+  const [selectedSort, setSelectedSort] = useState<string>('name_asc');
 
   useEffect(() => {
     async function fetchSongs() {
@@ -38,42 +38,53 @@ export default function Products() {
     setSelectedCategory(e.target.value);
   };
 
+  const handleInstrumentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const instrument = e.target.value;
+    if (selectedInstruments.includes(instrument)) {
+      setSelectedInstruments(prevInstruments =>
+        prevInstruments.filter(item => item !== instrument)
+      );
+    } else {
+      setSelectedInstruments(prevInstruments => [...prevInstruments, instrument]);
+    }
+  };
+
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedSort(e.target.value);
   };
 
   // Filter logic
-  const filteredSongs = selectedCategory === 'All'
-    ? songs
-    : songs.filter((song) => song.category === selectedCategory);
+  let filteredSongs = [...songs];
+
+  if (selectedCategory !== 'All') {
+    filteredSongs = filteredSongs.filter(song => song.category === selectedCategory);
+  }
+
+  if (selectedInstruments.length > 0) {
+    filteredSongs = filteredSongs.filter(song =>
+      selectedInstruments.every(instrument => song.instruments.includes(instrument))
+    );
+  }
 
   // Sort logic
-  let sortedSongs = [...filteredSongs]; // Create a copy of filteredSongs to avoid mutating state directly
+  let sortedSongs = [...filteredSongs];
 
+  // Sorting options (name or price)
   if (selectedSort === 'name_asc') {
-    sortedSongs.sort((a, b) => a.name.localeCompare(b.name)); // Sort by name ascending
+    sortedSongs.sort((a, b) => a.name.localeCompare(b.name));
   } else if (selectedSort === 'name_desc') {
-    sortedSongs.sort((a, b) => b.name.localeCompare(a.name)); // Sort by name descending
+    sortedSongs.sort((a, b) => b.name.localeCompare(a.name));
   } else if (selectedSort === 'price_asc') {
-    sortedSongs.sort((a, b) => {
-      if (a.price === b.price) {
-        return a.name.localeCompare(b.name); // If prices are equal, sort by name
-      }
-      return a.price - b.price; // Sort by price ascending
-    });
+    sortedSongs.sort((a, b) => a.price - b.price);
   } else if (selectedSort === 'price_desc') {
-    sortedSongs.sort((a, b) => {
-      if (a.price === b.price) {
-        return a.name.localeCompare(b.name); // If prices are equal, sort by name
-      }
-      return b.price - a.price; // Sort by price descending
-    });
+    sortedSongs.sort((a, b) => b.price - a.price);
   }
-  // Add more sorting options as needed...
 
   // Get unique categories
-  const categories = Array.from(new Set(songs.map((song) => song.category)));
-  categories.unshift('All');
+  const categories = ['All', ...Array.from(new Set(songs.map((song) => song.category)))];
+
+  // Get unique instruments
+  const instruments = Array.from(new Set(songs.flatMap((song) => song.instruments)));
 
   return (
     <div className="flex flex-col">
@@ -93,6 +104,22 @@ export default function Products() {
         </select>
       </div>
 
+      <div className="filter-options text-center m-3">
+        <label>Filter by Instruments: </label>
+        {instruments.map((instrument, index) => (
+          <div key={index} className="inline-block mx-2">
+            <input
+              type="checkbox"
+              id={instrument}
+              value={instrument}
+              onChange={handleInstrumentChange}
+              checked={selectedInstruments.includes(instrument)}
+            />
+            <label htmlFor={instrument}>{instrument}</label>
+          </div>
+        ))}
+      </div>
+
       <div className="sort-options text-center m-3">
         <label htmlFor="sortFilter">Sort by: </label>
         <select
@@ -103,9 +130,8 @@ export default function Products() {
         >
           <option value="name_asc">Name (A-Z)</option>
           <option value="name_desc">Name (Z-A)</option>
-          <option value="price_asc">Price (Low-High)</option>
-          <option value="price_desc">Price (High-Low)</option>
-          {/* Add more sorting options here */}
+          <option value="price_asc">Price (Low to High)</option>
+          <option value="price_desc">Price (High to Low)</option>
         </select>
       </div>
 
