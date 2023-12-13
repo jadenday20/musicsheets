@@ -8,7 +8,6 @@ const handler = async (req, res) => {
 
       return res.status(200).json({ music });
     } catch (error) {
-      console.log("Hi");
       return res.status(500).json({ error: error.message });
     }
   }

@@ -6,14 +6,13 @@ const handler = async (req, res) => {
       const musicId = req.query.id; // Assuming the ID is passed as a query parameter
 
       const { music, error } = await getMusic();
-      const game = music.find((music) => music.id === musicId); // Modify this line to find the music by ID
-      if (!music) {
+      const song = music.find((music) => music.id === musicId); // Modify this line to find the music by ID
+      if (!song) {
         return res.status(404).json({ error: "Music not found" });
       }
 
       return res.status(200).json({ music });
     } catch (error) {
-      console.log("Hi");
       return res.status(500).json({ error: error.message });
     }
   }
