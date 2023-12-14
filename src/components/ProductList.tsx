@@ -108,8 +108,8 @@ export default function Products() {
   const instruments = Array.from(new Set(songs.flatMap((song) => song.instruments)));
 
   return (
-    <div className="flex flex-col">
-              <div className="search-bar text-center m-3">
+    <div className="flex flex-col text-lg md:text-base">
+        <div className="search-bar text-center m-3">
           <label htmlFor="searchInput">Search: </label>
           <input
             type="text"
@@ -119,7 +119,7 @@ export default function Products() {
             onChange={handleSearch}
           />
           </div>
-      <div className="flex flex-col md:flex-row justify-center gap-5">
+      <div className="flex flex-col md:flex-row justify-center md:gap-5">
         <div className="filter-options text-center m-3">
           <label htmlFor="categoryFilter">Filter by Category: </label>
           <select
@@ -139,9 +139,9 @@ export default function Products() {
         <div className="filter-options text-center m-3">
           <label>Filter by Instruments: </label>
           {instruments.map((instrument, index) => (
-            <div key={index} className="inline-block mx-2">
+            <div key={index} className="mx-2 block md:inline-block text-2xl md:text-base">
               <input
-                className="cursor-pointer"
+                className="cursor-pointer w-5 h-5 md:w-4 md:h-4 mr-1"
                 type="checkbox"
                 id={instrument}
                 value={instrument}

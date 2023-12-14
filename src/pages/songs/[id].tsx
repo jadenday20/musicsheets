@@ -72,7 +72,7 @@ export default function Page() {
     return (
         <Layout>
             <div className='flex flex-col lg:flex-row gap-5'>
-                <div className='w-96'>
+                <div className='md:w-96'>
                     <h2>{song.name}</h2>
                     {/* <p className='text-xl font-bold'>{formatPrice(song.price)}</p> */}
                     <p>Composer: {song.composer}</p>
@@ -117,7 +117,7 @@ export default function Page() {
                 ></iframe>
             </div>
     
-            <span className='w-96 h-px bg-slate-800 my-2 block mx-auto'></span>
+            <span className='w-64 md:w-96 h-px bg-slate-800 my-2 block mx-auto'></span>
             <Button linkTitle="Find More Music" href="/music" />
         </Layout>
     );

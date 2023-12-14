@@ -8,9 +8,9 @@ export default function About() {
     return (
       <Layout>
         <div className="flex justify-center">
-            <div className="flex flex-col items-center justify-between p-16 max-w-5xl">
+            <div className="flex flex-col items-center justify-between max-w-3xl">
                 <h2>About</h2>
-                <div className="flex gap-9 h-auto">
+                <div className="flex flex-col lg:flex-row lg:gap-9 h-auto">
                     <div className="mt-6">
                         <h3>The Owner: Jaden Day</h3>
                         <p className="mb-2">Jaden Day is a Web Developer from Lindon, Utah. He is currently living in Pleasant Grove, Utah with his wife, Elisha. Jaden enjoys music board games and making websites. Most of all he loves spending time with his family.</p>
@@ -25,7 +25,7 @@ export default function About() {
                             priority
                         />
                 </div>
-                <div className="flex gap-9 h-auto self-baseline">
+                <div className="flex lg:flex-row flex-col-reverse lg:gap-9 h-auto self-baseline">
                     <Image
                             className="h-fit block"
                             src="/violin.jpg"
